@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SecureID - Create Account</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <main class="page">
+    <section class="auth-card screen active" id="screen-register">
+      <h1 class="auth-title">Create your account</h1>
+      <p class="auth-subtitle">Let's get you started</p>
+
+      <form id="register-form" novalidate>
+
+        <div class="form-group">
+          <label for="fullName">Full Name</label>
+          <input type="text" id="fullName" name="fullName" placeholder="Priya Sharma" autocomplete="name" />
+          <p class="field-error" id="error-fullName"></p>
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" placeholder="priya.sharma@email.com" autocomplete="email" />
+          <p class="field-error" id="error-email"></p>
+        </div>
+
+        <div class="form-group">
+          <label for="mobile">Mobile Number</label>
+          <div class="mobile-row">
+            <select id="countryCode" name="countryCode">
+              <option value="+91" selected>+91</option>
+              <option value="+1">+1</option>
+              <option value="+44">+44</option>
+              <option value="+61">+61</option>
+            </select>
+            <input type="tel" id="mobile" name="mobile" placeholder="98765 43210" autocomplete="tel-national" />
+          </div>
+          <p class="field-error" id="error-mobile"></p>
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password</label>
+          <div class="password-row">
+            <input type="password" id="password" name="password" autocomplete="new-password" />
+            <button type="button" class="toggle-password" id="toggle-password" aria-label="Show password">
+              <svg id="icon-eye" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                <circle cx="12" cy="12" r="3"/>
+              </svg>
+            </button>
+          </div>
+
+          <ul class="password-checklist" id="password-checklist">
+            <li id="rule-minLength" data-rule="minLength">
+              <span class="rule-icon">○</span> At least 8 characters
+            </li>
+            <li id="rule-hasUppercase" data-rule="hasUppercase">
+              <span class="rule-icon">○</span> 1 uppercase letter
+            </li>
+            <li id="rule-hasNumber" data-rule="hasNumber">
+              <span class="rule-icon">○</span> 1 number
+            </li>
+            <li id="rule-hasSpecialChar" data-rule="hasSpecialChar">
+              <span class="rule-icon">○</span> 1 special character
+            </li>
+          </ul>
+        </div>
+
+        <div class="form-group checkbox-group">
+          <input type="checkbox" id="terms" name="terms" />
+          <label for="terms" class="checkbox-label">
+            I agree to the <a href="#" target="_blank" rel="noopener">Terms &amp; Conditions</a>
+            and <a href="#" target="_blank" rel="noopener">Privacy Policy</a>.
+          </label>
+          <p class="field-error" id="error-terms"></p>
+        </div>
+
+        <p class="form-status" id="form-status" role="alert"></p>
+
+        <button type="submit" class="btn-primary" id="submit-btn">Create Account</button>
+      </form>
+
+      <p class="auth-footer">
+        Already have an account? <a href="#" id="login-link">Login</a>
+      </p>
+    </section>
+
+    <!-- Email OTP screen: one section, three visual states switched via
+         the data-state attribute (default / wrong / expired). See
+         css/style.css for how data-state controls what's visible, and
+         js/main.js for how the state is set based on the backend's
+         response. -->
+    <section class="auth-card screen otp-screen" id="screen-email-otp" data-state="default">
+      <button type="button" class="back-btn" id="email-otp-back" aria-label="Go back">&larr;</button>
+
+      <div class="otp-icon" id="email-otp-icon">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M4 4h16v16H4z"/>
+          <path d="M4 4l8 8 8-8"/>
+        </svg>
+      </div>
+
+      <h1 class="auth-title">Verify your email</h1>
+      <p class="auth-subtitle">
+        We have sent a 6-digit code to<br />
+        <strong id="email-otp-destination">your email</strong>
+      </p>
+
+      <div class="otp-boxes" id="email-otp-boxes">
+        <input type="text" inputmode="numeric" maxlength="1" class="otp-box" />
+        <input type="text" inputmode="numeric" maxlength="1" class="otp-box" />
+        <input type="text" inputmode="numeric" maxlength="1" class="otp-box" />
+        <input type="text" inputmode="numeric" maxlength="1" class="otp-box" />
+        <input type="text" inputmode="numeric" maxlength="1" class="otp-box" />
+        <input type="text" inputmode="numeric" maxlength="1" class="otp-box" />
+      </div>
+
+      <p class="otp-error" id="email-otp-error"></p>
+
+      <p class="otp-timer" id="email-otp-timer">
+        Code expires in <strong id="email-otp-countdown">03:00</strong>
+      </p>
+
+      <p class="otp-resend-line" id="email-otp-resend-line">
+        <a href="#" id="email-otp-resend-link">Resend code</a>
+        <span id="email-otp-resend-countdown"></span>
+      </p>
+
+      <button type="button" class="btn-primary otp-resend-btn" id="email-otp-resend-btn">
+        Resend New Code
+      </button>
+
+      <p class="otp-didnt-receive">
+        <a href="#" id="email-otp-didnt-receive">Didn't receive the code?</a>
+      </p>
+    </section>
+
+    <!-- Mobile OTP screen: same default/wrong/locked pattern as email,
+         plus a "Wrong number? Change" mini-form the email screen doesn't
+         need. "locked" covers both expired and max-attempts, matching
+         the single lockout look shown in the reference screenshots. -->
+    <section class="auth-card screen otp-screen" id="screen-sms-otp" data-state="default">
+      <button type="button" class="back-btn" id="sms-otp-back" aria-label="Go back">&larr;</button>
+
+      <div class="otp-icon otp-icon-phone" id="sms-otp-icon">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.362 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
+        </svg>
+      </div>
+
+      <h1 class="auth-title">Verify your mobile</h1>
+      <p class="auth-subtitle">
+        We have sent a 6-digit code to<br />
+        <strong id="sms-otp-destination">your mobile</strong>
+      </p>
+
+      <div class="otp-boxes" id="sms-otp-boxes">
+        <input type="text" inputmode="numeric" maxlength="1" class="otp-box" />
+        <input type="text" inputmode="numeric" maxlength="1" class="otp-box" />
+        <input type="text" inputmode="numeric" maxlength="1" class="otp-box" />
+        <input type="text" inputmode="numeric" maxlength="1" class="otp-box" />
+        <input type="text" inputmode="numeric" maxlength="1" class="otp-box" />
+        <input type="text" inputmode="numeric" maxlength="1" class="otp-box" />
+      </div>
+
+      <p class="otp-error" id="sms-otp-error"></p>
+
+      <p class="otp-timer" id="sms-otp-timer">
+        Code expires in <strong id="sms-otp-countdown">03:00</strong>
+      </p>
+
+      <p class="otp-resend-line" id="sms-otp-resend-line">
+        <a href="#" id="sms-otp-resend-link">Resend code</a>
+        <span id="sms-otp-resend-countdown"></span>
+      </p>
+
+      <button type="button" class="btn-primary otp-resend-btn" id="sms-otp-resend-btn">
+        Resend New Code
+      </button>
+
+      <p class="otp-wrong-number">
+        Wrong number? <a href="#" id="sms-otp-change-link">Change</a>
+      </p>
+
+      <!-- Hidden by default. Revealed when "Change" is clicked, in place
+           of asking the user to go all the way back to the registration
+           screen just to fix a typo in their mobile number. -->
+      <div class="mobile-change-form" id="mobile-change-form" hidden>
+        <div class="form-group">
+          <label for="new-mobile">New Mobile Number</label>
+          <div class="mobile-row">
+            <select id="new-countryCode">
+              <option value="+91" selected>+91</option>
+              <option value="+1">+1</option>
+              <option value="+44">+44</option>
+              <option value="+61">+61</option>
+            </select>
+            <input type="tel" id="new-mobile" placeholder="98765 43210" />
+          </div>
+          <p class="field-error" id="error-new-mobile"></p>
+        </div>
+        <button type="button" class="btn-primary" id="mobile-change-submit">
+          Update &amp; Resend Code
+        </button>
+      </div>
+    </section>
+
+    <!-- Set Up MFA: method selection. Only Authenticator App is actually
+         wired to a backend flow, per the architecture decision recorded
+         in PROJECT_CONTEXT.md - SMS/Email options are shown for visual
+         fidelity to the reference screenshots but are disabled. -->
+    <section class="auth-card screen" id="screen-mfa-setup">
+      <button type="button" class="back-btn" id="mfa-setup-back" aria-label="Go back">&larr;</button>
+
+      <div class="mfa-shield-icon">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 2 4 5v6c0 5.5 3.8 10.7 8 12 4.2-1.3 8-6.5 8-12V5l-8-3z"/>
+          <path d="M12 8v5"/>
+          <circle cx="12" cy="16" r="0.5" fill="currentColor"/>
+        </svg>
+      </div>
+
+      <h1 class="auth-title">Set up Multi-Factor Auth</h1>
+      <p class="auth-subtitle">Add an extra layer of security<br />to protect your account.</p>
+
+      <div class="mfa-method-list">
+        <label class="mfa-method-option mfa-method-selected">
+          <input type="radio" name="mfa-method" value="authenticator" checked />
+          <span class="mfa-method-icon">🔐</span>
+          <span class="mfa-method-text">
+            <strong>Authenticator App</strong>
+            <small>(Google Authenticator / Authy)</small>
+          </span>
+        </label>
+
+        <label class="mfa-method-option mfa-method-disabled">
+          <input type="radio" name="mfa-method" value="sms" disabled />
+          <span class="mfa-method-icon">💬</span>
+          <span class="mfa-method-text">
+            <strong>SMS Authentication</strong>
+            <small>Receive codes on your mobile (coming soon)</small>
+          </span>
+        </label>
+
+        <label class="mfa-method-option mfa-method-disabled">
+          <input type="radio" name="mfa-method" value="email" disabled />
+          <span class="mfa-method-icon">✉️</span>
+          <span class="mfa-method-text">
+            <strong>Email Authentication</strong>
+            <small>Receive codes on your email (coming soon)</small>
+          </span>
+        </label>
+      </div>
+
+      <p class="otp-error" id="mfa-setup-error"></p>
+
+      <button type="button" class="btn-primary" id="mfa-setup-continue">Continue</button>
+    </section>
+
+    <!-- Authenticator Setup: shows the QR code + manual setup key. -->
+    <section class="auth-card screen" id="screen-mfa-qr">
+      <button type="button" class="back-btn" id="mfa-qr-back" aria-label="Go back">&larr;</button>
+
+      <h1 class="auth-title">Scan QR Code</h1>
+      <p class="auth-subtitle">Open your authenticator app and<br />scan this QR code</p>
+
+      <div class="qr-wrapper">
+        <img id="mfa-qr-image" src="" alt="MFA setup QR code" />
+      </div>
+
+      <p class="otp-didnt-receive">
+        <a href="#" id="mfa-qr-enter-key-link">Can't scan? Enter setup key</a>
+      </p>
+
+      <div class="setup-key-box" id="setup-key-box" hidden>
+        <code id="setup-key-value"></code>
+      </div>
+
+      <button type="button" class="btn-primary" id="mfa-qr-continue">Continue</button>
+    </section>
+
+    <!-- MFA Verification: 6-digit code from the authenticator app. -->
+    <section class="auth-card screen otp-screen" id="screen-mfa-verify" data-state="default">
+      <button type="button" class="back-btn" id="mfa-verify-back" aria-label="Go back">&larr;</button>
+
+      <div class="otp-icon" id="mfa-verify-icon">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 2 4 5v6c0 5.5 3.8 10.7 8 12 4.2-1.3 8-6.5 8-12V5l-8-3z"/>
+        </svg>
+      </div>
+
+      <h1 class="auth-title">Enter the 6-digit code</h1>
+      <p class="auth-subtitle">Enter the code from your<br />authenticator app</p>
+
+      <div class="otp-boxes" id="mfa-verify-boxes">
+        <input type="text" inputmode="numeric" maxlength="1" class="otp-box" />
+        <input type="text" inputmode="numeric" maxlength="1" class="otp-box" />
+        <input type="text" inputmode="numeric" maxlength="1" class="otp-box" />
+        <input type="text" inputmode="numeric" maxlength="1" class="otp-box" />
+        <input type="text" inputmode="numeric" maxlength="1" class="otp-box" />
+        <input type="text" inputmode="numeric" maxlength="1" class="otp-box" />
+      </div>
+
+      <p class="otp-error" id="mfa-verify-error"></p>
+
+      <p class="otp-didnt-receive">
+        <a href="#" id="mfa-cant-access-link">Can't access your app?</a>
+      </p>
+    </section>
+
+    <!-- Registration Success: final screen of the whole journey. -->
+    <section class="auth-card screen" id="screen-success">
+      <div class="success-icon">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"/>
+          <path d="m9 12 2 2 4-4"/>
+        </svg>
+      </div>
+
+      <h1 class="auth-title">Account created!</h1>
+      <p class="auth-subtitle">Your account has been created<br />successfully and MFA is enabled.</p>
+
+      <ul class="success-checklist">
+        <li id="check-email">✓ Email verified</li>
+        <li id="check-mobile">✓ Mobile verified</li>
+        <li id="check-mfa">✓ MFA enabled</li>
+      </ul>
+
+      <button type="button" class="btn-primary" id="continue-to-login">Continue to Login</button>
+    </section>
+  </main>
+
+  <script src="js/passwordStrength.js"></script>
+  <script src="js/otpInput.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

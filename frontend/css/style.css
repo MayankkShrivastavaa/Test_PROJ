@@ -1,0 +1,589 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+  background-color: #f5f6fa;
+  color: #1f2937;
+}
+
+.page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 420px;
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 32px 28px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08), 0 8px 24px rgba(0, 0, 0, 0.06);
+}
+
+.auth-title {
+  font-size: 24px;
+  font-weight: 700;
+  margin: 0 0 4px 0;
+  text-align: center;
+}
+
+.auth-subtitle {
+  font-size: 14px;
+  color: #6b7280;
+  text-align: center;
+  margin: 0 0 24px 0;
+}
+
+.form-group {
+  margin-bottom: 18px;
+}
+
+label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: #374151;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="password"],
+select {
+  width: 100%;
+  padding: 10px 12px;
+  font-size: 14px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  outline: none;
+  background: #fff;
+  color: #111827;
+}
+
+input:focus,
+select:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+input.input-invalid {
+  border-color: #dc2626;
+}
+
+.mobile-row {
+  display: flex;
+  gap: 8px;
+}
+
+.mobile-row select {
+  width: 90px;
+  flex-shrink: 0;
+}
+
+.mobile-row input {
+  flex: 1;
+}
+
+.password-row {
+  position: relative;
+}
+
+.password-row input {
+  padding-right: 40px;
+}
+
+.toggle-password {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #6b7280;
+  padding: 4px;
+  display: flex;
+}
+
+.toggle-password:hover {
+  color: #374151;
+}
+
+.password-checklist {
+  list-style: none;
+  margin: 10px 0 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+}
+
+.password-checklist li {
+  font-size: 12.5px;
+  color: #9ca3af;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.password-checklist li .rule-icon {
+  font-size: 13px;
+  line-height: 1;
+}
+
+.password-checklist li.rule-met {
+  color: #059669;
+}
+
+.password-checklist li.rule-met .rule-icon::before {
+  content: "✓";
+}
+
+.password-checklist li:not(.rule-met) .rule-icon::before {
+  content: "○";
+}
+
+.checkbox-group {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.checkbox-group input[type="checkbox"] {
+  margin-top: 3px;
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+.checkbox-label {
+  font-size: 13px;
+  color: #4b5563;
+  font-weight: 400;
+  margin: 0;
+}
+
+.checkbox-label a {
+  color: #2563eb;
+  text-decoration: none;
+}
+
+.checkbox-label a:hover {
+  text-decoration: underline;
+}
+
+.field-error {
+  font-size: 12.5px;
+  color: #dc2626;
+  margin: 6px 0 0 0;
+  min-height: 0;
+}
+
+.field-error:empty {
+  display: none;
+}
+
+.form-status {
+  font-size: 13px;
+  margin: 0 0 12px 0;
+  padding: 0;
+}
+
+.form-status:empty {
+  display: none;
+  margin: 0;
+}
+
+.form-status.status-error {
+  color: #dc2626;
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  padding: 10px 12px;
+  border-radius: 8px;
+}
+
+.form-status.status-success {
+  color: #059669;
+  background: #ecfdf5;
+  border: 1px solid #a7f3d0;
+  padding: 10px 12px;
+  border-radius: 8px;
+}
+
+.btn-primary {
+  width: 100%;
+  padding: 12px;
+  background: #2563eb;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.btn-primary:hover {
+  background: #1d4ed8;
+}
+
+.btn-primary:disabled {
+  background: #93c5fd;
+  cursor: not-allowed;
+}
+
+.auth-footer {
+  text-align: center;
+  font-size: 13px;
+  color: #6b7280;
+  margin-top: 20px;
+}
+
+.auth-footer a {
+  color: #2563eb;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.auth-footer a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 480px) {
+  .password-checklist {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---------- Screen switching ---------- */
+/* Only one .screen has .active at a time - see main.js showScreen(). */
+.screen {
+  display: none;
+}
+
+.screen.active {
+  display: block;
+}
+
+/* ---------- OTP screens (shared by email/sms/mfa) ---------- */
+
+.back-btn {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: #374151;
+  padding: 0;
+  margin-bottom: 12px;
+}
+
+.otp-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: #dbeafe;
+  color: #2563eb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 16px auto;
+}
+
+#screen-email-otp[data-state="wrong"] .otp-icon,
+#screen-email-otp[data-state="expired"] .otp-icon,
+#screen-sms-otp[data-state="wrong"] .otp-icon,
+#screen-sms-otp[data-state="expired"] .otp-icon {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+.otp-screen .auth-title,
+.otp-screen .auth-subtitle {
+  text-align: center;
+}
+
+.otp-screen .auth-subtitle {
+  margin-bottom: 24px;
+  line-height: 1.5;
+}
+
+.otp-boxes {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.otp-box {
+  width: 44px;
+  height: 52px;
+  text-align: center;
+  font-size: 20px;
+  font-weight: 600;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+}
+
+.otp-box:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+  outline: none;
+}
+
+#screen-email-otp[data-state="wrong"] .otp-box,
+#screen-sms-otp[data-state="wrong"] .otp-box {
+  border-color: #dc2626;
+}
+
+#screen-email-otp[data-state="expired"] .otp-boxes,
+#screen-sms-otp[data-state="expired"] .otp-boxes {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.otp-error {
+  text-align: center;
+  color: #dc2626;
+  font-size: 13px;
+  font-weight: 600;
+  margin: 0 0 8px 0;
+  min-height: 0;
+}
+
+.otp-error:empty {
+  display: none;
+}
+
+.otp-error.otp-success {
+  color: #059669;
+}
+
+.otp-timer {
+  text-align: center;
+  font-size: 13px;
+  color: #4b5563;
+  margin: 0 0 16px 0;
+}
+
+#screen-email-otp[data-state="expired"] .otp-timer,
+#screen-sms-otp[data-state="expired"] .otp-timer {
+  display: none;
+}
+
+.otp-resend-line {
+  text-align: center;
+  font-size: 13px;
+  margin: 0 0 16px 0;
+}
+
+.otp-resend-line a {
+  color: #2563eb;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.otp-resend-line a.disabled {
+  color: #9ca3af;
+  pointer-events: none;
+}
+
+#email-otp-resend-countdown,
+#sms-otp-resend-countdown {
+  color: #6b7280;
+  margin-left: 4px;
+}
+
+#screen-email-otp[data-state="expired"] .otp-resend-line,
+#screen-sms-otp[data-state="expired"] .otp-resend-line {
+  display: none;
+}
+
+.otp-resend-btn {
+  display: none;
+  margin-bottom: 16px;
+}
+
+#screen-email-otp[data-state="expired"] .otp-resend-btn,
+#screen-sms-otp[data-state="expired"] .otp-resend-btn {
+  display: block;
+}
+
+.otp-didnt-receive {
+  text-align: center;
+  font-size: 13px;
+  margin: 0;
+}
+
+.otp-didnt-receive a {
+  color: #2563eb;
+  text-decoration: none;
+}
+
+#screen-email-otp[data-state="expired"] .otp-didnt-receive {
+  display: none;
+}
+
+/* ---------- Mobile OTP screen extras ---------- */
+
+.otp-icon-phone {
+  background: #d1fae5;
+  color: #059669;
+}
+
+.otp-wrong-number {
+  text-align: center;
+  font-size: 13px;
+  color: #4b5563;
+  margin: 0;
+}
+
+.otp-wrong-number a {
+  color: #2563eb;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.mobile-change-form {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid #e5e7eb;
+}
+
+/* ---------- MFA setup screen ---------- */
+
+.mfa-shield-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: #ede9fe;
+  color: #7c3aed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 16px auto;
+}
+
+#screen-mfa-setup .auth-title,
+#screen-mfa-setup .auth-subtitle,
+#screen-mfa-qr .auth-title,
+#screen-mfa-qr .auth-subtitle,
+#screen-success .auth-title,
+#screen-success .auth-subtitle {
+  text-align: center;
+}
+
+#screen-mfa-setup .auth-subtitle,
+#screen-mfa-qr .auth-subtitle {
+  margin-bottom: 20px;
+  line-height: 1.5;
+}
+
+.mfa-method-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.mfa-method-option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.mfa-method-option input[type="radio"] {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+.mfa-method-icon {
+  font-size: 20px;
+}
+
+.mfa-method-text {
+  display: flex;
+  flex-direction: column;
+  font-size: 13.5px;
+}
+
+.mfa-method-text small {
+  color: #6b7280;
+  font-weight: 400;
+}
+
+.mfa-method-selected {
+  border-color: #2563eb;
+  background: #eff6ff;
+}
+
+.mfa-method-disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ---------- Authenticator setup (QR) screen ---------- */
+
+.qr-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.qr-wrapper img {
+  width: 180px;
+  height: 180px;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 8px;
+}
+
+.setup-key-box {
+  text-align: center;
+  background: #f3f4f6;
+  border-radius: 8px;
+  padding: 10px;
+  margin: 12px 0 16px 0;
+  word-break: break-all;
+  font-size: 13px;
+}
+
+/* ---------- Registration success screen ---------- */
+
+.success-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: #d1fae5;
+  color: #059669;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 16px auto;
+}
+
+.success-checklist {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 24px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.success-checklist li {
+  color: #059669;
+  font-size: 13.5px;
+  font-weight: 600;
+  text-align: center;
+}
