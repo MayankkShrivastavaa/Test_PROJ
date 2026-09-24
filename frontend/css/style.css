@@ -298,14 +298,10 @@ input.input-invalid {
 #screen-email-otp[data-state="wrong"] .otp-icon,
 #screen-email-otp[data-state="expired"] .otp-icon,
 #screen-sms-otp[data-state="wrong"] .otp-icon,
-<<<<<<< HEAD
 #screen-sms-otp[data-state="expired"] .otp-icon,
 #screen-sms-otp[data-state="locked"] .otp-icon,
 #screen-login-otp[data-state="wrong"] .otp-icon,
 #screen-login-otp[data-state="expired"] .otp-icon {
-=======
-#screen-sms-otp[data-state="expired"] .otp-icon {
->>>>>>> origin/main
   background: #fee2e2;
   color: #dc2626;
 }
@@ -344,23 +340,15 @@ input.input-invalid {
 }
 
 #screen-email-otp[data-state="wrong"] .otp-box,
-<<<<<<< HEAD
 #screen-sms-otp[data-state="wrong"] .otp-box,
 #screen-login-otp[data-state="wrong"] .otp-box {
-=======
-#screen-sms-otp[data-state="wrong"] .otp-box {
->>>>>>> origin/main
   border-color: #dc2626;
 }
 
 #screen-email-otp[data-state="expired"] .otp-boxes,
-<<<<<<< HEAD
 #screen-sms-otp[data-state="expired"] .otp-boxes,
 #screen-sms-otp[data-state="locked"] .otp-boxes,
 #screen-login-otp[data-state="expired"] .otp-boxes {
-=======
-#screen-sms-otp[data-state="expired"] .otp-boxes {
->>>>>>> origin/main
   opacity: 0.5;
   pointer-events: none;
 }
@@ -370,22 +358,16 @@ input.input-invalid {
   color: #dc2626;
   font-size: 13px;
   font-weight: 600;
-<<<<<<< HEAD
   margin: 0 0 12px 0;
   min-height: 0;
   padding: 0;
   border-radius: 8px;
-=======
-  margin: 0 0 8px 0;
-  min-height: 0;
->>>>>>> origin/main
 }
 
 .otp-error:empty {
   display: none;
 }
 
-<<<<<<< HEAD
 /* Every non-empty OTP-flow error (wrong code, expired, max-attempts)
    gets a light background banner, matching the reference screenshots -
    not just colored text. The :not(:empty) guard means an OTP screen
@@ -401,10 +383,6 @@ input.input-invalid {
   background: #ecfdf5;
   border: 1px solid #a7f3d0;
   padding: 10px 12px;
-=======
-.otp-error.otp-success {
-  color: #059669;
->>>>>>> origin/main
 }
 
 .otp-timer {
@@ -415,13 +393,9 @@ input.input-invalid {
 }
 
 #screen-email-otp[data-state="expired"] .otp-timer,
-<<<<<<< HEAD
 #screen-sms-otp[data-state="expired"] .otp-timer,
 #screen-sms-otp[data-state="locked"] .otp-timer,
 #screen-login-otp[data-state="expired"] .otp-timer {
-=======
-#screen-sms-otp[data-state="expired"] .otp-timer {
->>>>>>> origin/main
   display: none;
 }
 
@@ -449,12 +423,8 @@ input.input-invalid {
 }
 
 #screen-email-otp[data-state="expired"] .otp-resend-line,
-<<<<<<< HEAD
 #screen-sms-otp[data-state="expired"] .otp-resend-line,
 #screen-sms-otp[data-state="locked"] .otp-resend-line {
-=======
-#screen-sms-otp[data-state="expired"] .otp-resend-line {
->>>>>>> origin/main
   display: none;
 }
 
@@ -464,12 +434,8 @@ input.input-invalid {
 }
 
 #screen-email-otp[data-state="expired"] .otp-resend-btn,
-<<<<<<< HEAD
 #screen-sms-otp[data-state="expired"] .otp-resend-btn,
 #screen-sms-otp[data-state="locked"] .otp-resend-btn {
-=======
-#screen-sms-otp[data-state="expired"] .otp-resend-btn {
->>>>>>> origin/main
   display: block;
 }
 
@@ -646,7 +612,6 @@ input.input-invalid {
   font-weight: 600;
   text-align: center;
 }
-<<<<<<< HEAD
 
 /* =====================================================================
    DESKTOP-ONLY CHROME: brand header, step indicator, footer.
@@ -1059,5 +1024,3 @@ input.input-invalid {
 #login-otp-boxes .otp-box {
   cursor: default;
 }
-=======
->>>>>>> origin/main

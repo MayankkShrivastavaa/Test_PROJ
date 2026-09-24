@@ -1,9 +1,6 @@
 const express = require("express");
 const cors = require("cors");
-<<<<<<< HEAD
 const cookieParser = require("cookie-parser");
-=======
->>>>>>> origin/main
 
 const authRoute = require("../backend/routes/authRoute");
 
@@ -12,7 +9,6 @@ const app = express();
 // Parses incoming JSON request bodies into req.body
 app.use(express.json());
 
-<<<<<<< HEAD
 // Parses the "Cookie" header into req.cookies, so requireSession.js can
 // read the "sid" session cookie.
 app.use(cookieParser());
@@ -32,17 +28,6 @@ app.use(cookieParser());
 // On Vercel, both are served from the same domain (see vercel.json), so
 // this becomes same-origin and effectively a no-op in production.
 app.use(cors({ origin: true, credentials: true }));
-=======
-// The frontend (served from a different local port, e.g. 5500) and the
-// backend (e.g. port 5000) are on different origins during local
-// development, so the browser blocks fetch() calls between them unless
-// the backend explicitly allows it. cors() adds the required
-// "Access-Control-Allow-Origin" response header.
-// On Vercel, both are served from the same domain (see vercel.json),
-// so this becomes a harmless no-op in production rather than a
-// requirement.
-app.use(cors());
->>>>>>> origin/main
 
 app.get("/api/health", (req, res) => {
   res.status(200).json({ status: "ok" });
