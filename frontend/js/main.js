@@ -24,6 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
     .getElementById("register-form")
     .addEventListener("submit", handleRegisterSubmit);
 
+<<<<<<< HEAD
   document.getElementById("login-link").addEventListener("click", (event) => {
     event.preventDefault();
     showScreen("screen-login");
@@ -33,6 +34,11 @@ document.addEventListener("DOMContentLoaded", () => {
   setupSmsOtpScreen();
   setupMfaScreens();
   setupLoginScreens();
+=======
+  setupEmailOtpScreen();
+  setupSmsOtpScreen();
+  setupMfaScreens();
+>>>>>>> origin/main
 });
 
 function showScreen(screenId) {
@@ -40,6 +46,7 @@ function showScreen(screenId) {
     section.classList.remove("active");
   });
   document.getElementById(screenId).classList.add("active");
+<<<<<<< HEAD
   updateStepIndicator(screenId);
 }
 
@@ -88,6 +95,8 @@ function updateStepIndicator(screenId) {
     // once we're past step 2, and so on.
     line.classList.toggle("completed", index + 2 <= activeStep);
   });
+=======
+>>>>>>> origin/main
 }
 
 // ===================== Registration screen =====================
@@ -505,12 +514,16 @@ async function handleSmsOtpVerify(code) {
     screen.dataset.state = "expired";
     errorEl.textContent = "This code has expired.";
     errorEl.className = "otp-error";
+<<<<<<< HEAD
     clearOtpBoxes(boxes);
     boxes.forEach((box) => (box.disabled = true));
+=======
+>>>>>>> origin/main
     return;
   }
 
   if (data.maxAttemptsReached) {
+<<<<<<< HEAD
     // Distinct "locked" visual from "expired", matching the reference
     // screenshot's separate Max Attempts screen for Mobile OTP (email's
     // OTP flow still reuses "expired" for this case - see
@@ -521,6 +534,12 @@ async function handleSmsOtpVerify(code) {
     errorEl.className = "otp-error";
     clearOtpBoxes(boxes);
     boxes.forEach((box) => (box.disabled = true));
+=======
+    stopSmsOtpTimers();
+    screen.dataset.state = "expired"; // same locked visual as expired
+    errorEl.textContent = "Maximum attempts reached. Please request a new code.";
+    errorEl.className = "otp-error";
+>>>>>>> origin/main
     return;
   }
 
@@ -604,6 +623,7 @@ function setupMfaScreens() {
     clearOtpBoxes(boxes);
   });
 
+<<<<<<< HEAD
   // Desktop-only Back/Continue pair does exactly the same two things as
   // the mobile arrow + single Continue button - reusing the same logic
   // rather than duplicating it.
@@ -617,6 +637,8 @@ function setupMfaScreens() {
     clearOtpBoxes(boxes);
   });
 
+=======
+>>>>>>> origin/main
   const mfaBoxes = Array.from(document.querySelectorAll("#mfa-verify-boxes .otp-box"));
   setupOtpBoxAutoAdvance(mfaBoxes);
   mfaBoxes.forEach((box) => {
@@ -644,7 +666,14 @@ function setupMfaScreens() {
   });
 
   document.getElementById("continue-to-login").addEventListener("click", () => {
+<<<<<<< HEAD
     showScreen("screen-login");
+=======
+    // Login itself is a separate phase (Part 2) and doesn't exist yet -
+    // this is a clearly-labeled placeholder rather than a dead link that
+    // silently does nothing.
+    alert("Login screen isn't built yet - that's the next phase after this one.");
+>>>>>>> origin/main
   });
 }
 
@@ -707,6 +736,7 @@ function showSuccessScreen() {
   // checklist doesn't need to re-fetch anything from the backend.
   showScreen("screen-success");
 }
+<<<<<<< HEAD
 
 // ===================== PART 2: Login =====================
 
@@ -1028,3 +1058,5 @@ async function handleLoginOtpResend() {
   pendingLoginOtpExpiresAt = result.data.expiresAt;
   startLoginOtpFlow();
 }
+=======
+>>>>>>> origin/main

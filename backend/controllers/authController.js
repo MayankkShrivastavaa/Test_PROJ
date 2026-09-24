@@ -1,10 +1,16 @@
 const bcrypt = require("bcryptjs");
+<<<<<<< HEAD
 const jwt = require("jsonwebtoken");
+=======
+>>>>>>> origin/main
 
 const userStore = require("../store/userStore");
 const otpService = require("../services/otpService");
 const mfaService = require("../services/mfaService");
+<<<<<<< HEAD
 const sessionStore = require("../store/sessionStore");
+=======
+>>>>>>> origin/main
 const {
   isValid,
   isValidFullName,
@@ -13,6 +19,7 @@ const {
   checkPasswordStrength,
 } = require("../utils/validators");
 
+<<<<<<< HEAD
 const MAX_FAILED_LOGIN_ATTEMPTS = 5;
 const LOCKOUT_DURATION_MS = 15 * 60 * 1000; // 15 minutes
 const JWT_EXPIRES_IN = "15m";
@@ -36,6 +43,8 @@ const getSessionCookieOptions = () => {
   };
 };
 
+=======
+>>>>>>> origin/main
 // POST /api/register
 const registerUser = async (req, res) => {
   try {
@@ -440,6 +449,7 @@ const verifyMfa = async (req, res) => {
 };
 
 
+<<<<<<< HEAD
 // POST /api/login
 // Step 1 of login: validate credentials, handle lockout, and if
 // credentials are correct, kick off MFA (this project only ever enables
@@ -672,6 +682,8 @@ const getProtectedResource = (req, res) => {
 };
 
 
+=======
+>>>>>>> origin/main
 // Test-only endpoint so an evaluator (or the developer) can retrieve a
 // simulated OTP without reading server console logs. Gated so it can
 // never accidentally run in a real production environment - see
@@ -701,11 +713,14 @@ module.exports = {
   changeMobile,
   setupMfa,
   verifyMfa,
+<<<<<<< HEAD
   loginUser,
   verifyLoginOtp,
   getMe,
   logout,
   issueToken,
   getProtectedResource,
+=======
+>>>>>>> origin/main
   getDevLastOtp,
 };

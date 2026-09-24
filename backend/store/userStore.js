@@ -36,8 +36,11 @@ const createUser = ({ fullName, email, mobile, passwordHash }) => {
     mobileVerified: false,
     mfaEnabled: false,
     mfaSecret: null, // set once MFA setup begins, in setMfaSecret()
+<<<<<<< HEAD
     failedLoginAttempts: 0, // used for temporary account lockout - see loginUser
     lockUntil: null, // timestamp (ms); account is locked while Date.now() < lockUntil
+=======
+>>>>>>> origin/main
     createdAt: new Date().toISOString(),
   };
 
@@ -91,6 +94,7 @@ const markMfaEnabled = (userId) => {
   return user;
 };
 
+<<<<<<< HEAD
 // ===================== Login / lockout helpers =====================
 
 const incrementFailedLoginAttempts = (userId) => {
@@ -115,6 +119,8 @@ const lockAccount = (userId, lockUntilTimestamp) => {
   return user;
 };
 
+=======
+>>>>>>> origin/main
 module.exports = {
   findUserByEmail,
   findUserById,
@@ -124,7 +130,10 @@ module.exports = {
   updateMobile,
   setMfaSecret,
   markMfaEnabled,
+<<<<<<< HEAD
   incrementFailedLoginAttempts,
   resetFailedLoginAttempts,
   lockAccount,
+=======
+>>>>>>> origin/main
 };

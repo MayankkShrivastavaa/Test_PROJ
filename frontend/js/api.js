@@ -227,6 +227,7 @@ async function verifyMfa(userId, code) {
     };
   }
 }
+<<<<<<< HEAD
 
 // ===================== Part 2: Login / Session / JWT =====================
 // These four calls all use `credentials: "include"` because they involve
@@ -329,3 +330,5 @@ async function logoutUser() {
     };
   }
 }
+=======
+>>>>>>> origin/main
